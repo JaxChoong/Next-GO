@@ -1,10 +1,28 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+    const [backendData, setBackendData] = useState('')
+  useEffect(()=>{
+    const fetchData= async () =>{
+      try{
+          // include the scheme so the browser can resolve the URL
+          const response = await fetch('http://localhost:8080/')
+        if (!response.ok){
+          throw new Error(`HTTP Error! status: ${response.status}`)
+        }
+        const data = await response.json()
+        // backend returns { message: "..." }
+        setBackendData(data.message)
+      }catch{
+          console.log("Error found")
+      }
+    }
+    fetchData();
+  },[])
 
   return (
     <>
@@ -22,7 +40,7 @@ function App() {
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          {backendData}
         </p>
       </div>
       <p className="read-the-docs">
