@@ -1,8 +1,13 @@
-module test
+module main
 
 go 1.25.0
 
-require github.com/gin-gonic/gin v1.11.0
+replace home => /Home
+
+require (
+	github.com/gin-gonic/gin v1.11.0
+	home v0.0.0-00010101000000-000000000000
+)
 
 require (
 	github.com/bytedance/sonic v1.14.0 // indirect
