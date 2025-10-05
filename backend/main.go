@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"home"
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -38,7 +39,6 @@ func main() {
 	})
 
 	router.GET("/", handleHome)
-
 
 	router.Run(":8080")
 }
