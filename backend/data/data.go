@@ -2,10 +2,10 @@ package data
 
 import (
 	"encoding/csv"
-	"fmt"
 	"io"
 	"log"
 	"os"
+	"strconv"
 )
 
 type Book struct {
@@ -20,7 +20,7 @@ type Book struct {
 }
 
 func Data() []Book {
-	// var Books []Book
+	var Books []Book
 	filePath := "./data/data.csv"
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -37,14 +37,24 @@ func Data() []Book {
 		if err != nil {
 			log.Fatal(err)
 		}
-		addToBooks(record)
+		Books = addToBooks(record, Books)
 	}
-	return nil
+	return Books
 }
 
-func addToBooks(record []string) {
-	for _, word := range record {
-		print(word)
-	}
-	fmt.Println()
+func addToBooks(record []string, Books []Book) []Book {
+	var currentBook Book
+	currentBook.Id = record[0]
+	currentBook.Title = record[1]
+	currentBook.Author = record[2]
+	year, _ := strconv.Atoi(record[3])
+	currentBook.Year = year
+	currentBook.Description = record[4]
+	currentBook.CoverImage = record[5]
+	rating, _ := strconv.ParseFloat(record[6], 64)
+	currentBook.Rating = rating
+	pages, _ := strconv.Atoi(record[7])
+	currentBook.Pages = pages
+	Books = append(Books, currentBook)
+	return Books
 }

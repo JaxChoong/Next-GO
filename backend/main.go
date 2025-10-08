@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"home"
 	"net/http"
-	"data"
 	"github.com/gin-gonic/gin"
 )
 
@@ -45,8 +44,6 @@ func main() {
 
 func handleHome(c *gin.Context) {
 	// write JSON response (no return value from c.JSON)
-	print("Get message from home")
-	data.Data()
 	c.JSON(http.StatusOK, gin.H{
 		"message": home.Home(),
 	})
