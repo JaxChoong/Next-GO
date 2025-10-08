@@ -29,6 +29,7 @@ func Data() []Book {
 	defer file.Close()
 
 	reader := csv.NewReader(file)
+	_,_ = reader.Read()
 	for {
 		record, err := reader.Read()
 		if err == io.EOF {
